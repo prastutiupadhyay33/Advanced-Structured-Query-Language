@@ -16,7 +16,9 @@ insert into employs (emp_id,name,salary) values
 (2,'Neha', '62000.00'),
 (3,'Ravi','45000.00'),
 (4,'Priya','70000.00');
-# Trigger to Log Insert Activity.
+
+#1 Trigger to Log Insert Activity.
+
 Delimiter //
 create trigger trg_after_insert_employs
 after insert on employs
@@ -27,7 +29,8 @@ values (NEW.emp_id,'Employee Inserted');
 end //
 Delimiter ;
 insert into employs values (5,'Rina',60000);
-# Trigger to Log Employee Delete.
+
+#2 Trigger to Log Employee Delete.
 Delimiter //
 create trigger trg_after_delete_employs
 after delete on employs
@@ -38,7 +41,9 @@ values (OLD.emp_id,'Employee Deleted');
 end //
 Delimiter ;
 delete from employs where emp_id = 1;
-# Trigger to Log Salary Update.
+
+#3 Trigger to Log Salary Update.
+
 Delimiter //
 create trigger trg_after_salary_update
 after update on employs
@@ -54,7 +59,9 @@ set sql_safe_updates=0;
 update employs
 set salary = 60000
 where emp_id = 2;
-# Trigger to Prevent Negative Salary.
+
+#4 Trigger to Prevent Negative Salary.
+
 Delimiter //
 create trigger trg_before_insert_salary
 before insert on employs
@@ -67,7 +74,9 @@ end if;
 end //
 Delimiter ;
 insert into employs values (6,'Aarya',-10000);
-# Trigger to Automatically Increase Salary by 10%.
+
+#5 Trigger to Automatically Increase Salary by 10%.
+
 Delimiter //
 create trigger trg_before_insert_inc
 before insert on employs
@@ -77,7 +86,9 @@ set NEW.salary = NEW.salary * 1.10;
 end //
 Delimiter ;
 insert into employs values (7,'Nitin',20000);
-# Trigger to Store Old and New Salary Change.
+
+#6 Trigger to Store Old and New Salary Change.
+
 Delimiter //
 create trigger trg_salary_change
 after update on employs
@@ -97,7 +108,9 @@ Delimiter ;
 update employs
 set salary = 80000
 where emp_id = 3;
-# Trigger to Convert Employee Name to Uppercase.
+
+#7 Trigger to Convert Employee Name to Uppercase.
+
 Delimiter //
 create trigger trg_uppercase_name
 before insert on employs
@@ -107,7 +120,9 @@ set NEW.name = upper(NEW.name);
 end //
 Delimiter ;
 insert into employs values (8,'Kinjal',65000);
-# Trigger to Restrict Salary Reduction.
+
+# 8Trigger to Restrict Salary Reduction.
+
 Delimiter //
 create trigger trg_prevent_salary_reduce
 before update on employs
@@ -122,7 +137,9 @@ Delimiter ;
 update employs
 set salary = 20000
 where emp_id = 2;
-# Trigger to Log Name Changes.
+
+#9 Trigger to Log Name Changes.
+
 Delimiter //
 create trigger trg_name_change
 after update on employs
@@ -139,7 +156,8 @@ set name ='Prayusha'
 where emp_id = 4;
 select*from employs;
 select*from employsss_log;
-# Trigger to Prevent Salary Above Limit.
+
+#10 Trigger to Prevent Salary Above Limit.
 DELIMITER //
 create trigger trg_salary_limit
 before insert on employs
@@ -153,7 +171,9 @@ end //
 DELIMITER ;
 insert into employs values (1,'Amit',50000);
 insert into employs values (2,'Neha',120000);
-# Trigger to Prevent Updating Employee ID.
+
+#11 Trigger to Prevent Updating Employee ID.
+
 DELIMITER //
 create trigger trg_no_id_update
 before update on employs
@@ -168,7 +188,9 @@ DELIMITER ;
 update employs
 set emp_id = 10
 where emp_id = 1;
-# Trigger to Add Bonus Salary on Update.
+
+#12 Trigger to Add Bonus Salary on Update.
+
 Delimiter //
 create trigger trg_bonus_salary
 before update on employs
@@ -182,7 +204,9 @@ Delimiter ;
 update employs
 set salary = 80000
 where emp_id = 2;
-# Trigger to Add Joining Message.
+
+#13 Trigger to Add Joining Message.
+
 Delimiter //
 create trigger trg_join_message
 after insert on employs
@@ -193,7 +217,9 @@ values (NEW.emp_id,'Welcome New Employee');
 end //
 Delimiter ;
 insert into employs values (12,'Riya',45000);
-# Trigger to Log High Salary Employee.
+
+#14 Trigger to Log High Salary Employee.
+
 Delimiter //
 create trigger trg_high_salary
 after insert on employs
@@ -206,7 +232,9 @@ end if;
 end //
 Delimiter ;
 insert into employs values (10,'Kartik',90000);
-# Trigger to Prevent Duplicate Employee Name.
+
+#15 Trigger to Prevent Duplicate Employee Name.
+
 Delimiter //
 create trigger trg_duplicate_name
 before insert on employs
